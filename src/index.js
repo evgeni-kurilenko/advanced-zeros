@@ -20,23 +20,25 @@ module.exports = function getZerosCount(number, base) {
         }
         
         //делаем массив - в нем будем вычислять, в какой степени содержится каждый нужный простой множитель в number!
-        var snr = [];
+       /* var snr = [];
         for (m = 0; m < sn.length; m++) {
             snr[m] = 0;
-        }
+        }*/
         
-        for (var i = 0; i < sn.length; i++) {
-            for (var j = sn[i][0]; j <= number; j += sn[i][0]) {
+       // for (var i = 0; i < sn.length; i++) {
+        var t = sn[sn.length-1][0];
+        var p = 0;
+            for (var j = t; j <= number; j += t) {
                 var j1 = j;
-                while (j1 % sn[i][0] == 0) {
-                    snr[i]++;
-                    j1 /= sn[i][0];
+                while (j1 % t == 0) {
+                    p++;
+                    j1 /= t;
                 }
                 
             }
-        }
+        //}
 
-        
+        /*
         //высичляем кол-во нулей
         var r = [];
         for (var i =0; i < sn.length; i++) {
@@ -49,7 +51,8 @@ module.exports = function getZerosCount(number, base) {
                 min = r[i];
               }
           }
+          */
         
     }
-    return(min);
+    return(p);
 }

@@ -1,58 +1,32 @@
 module.exports = function getZerosCount(number, base) {
   // your implementation
-    if (number >= base) {
-        //двумерный массив, который будет хранить разложение основания системы счисления на простые множители
-        var sn = [];
-        //разложение на простые множители (с учетом степени)
-        //for (var k = 0; k < )
-        var k = 0;
-        var base1 = base;
-        var i;
-        for (i = 2; i <= base; i++) {
-            if (base1 % i == 0) {
-                sn[k] = [i, 0];
-                while (base1 % i == 0) {
-                    sn[k][1]++;
-                    base1 /= i;
-                }
-                k++;
+    
+    var base1 = base;
+    let answer = Infinity;
+    
+    for (let i = 2; i <= base1; i++) {
+        if (base1 % i == 0) {
+            let stepen = 0;
+            while (base1 % i == 0) {
+                stepen++;
+                base1 /= i;
             }
-        }
-        
-        //делаем массив - в нем будем вычислять, в какой степени содержится каждый нужный простой множитель в number!
-       /* var snr = [];
-        for (m = 0; m < sn.length; m++) {
-            snr[m] = 0;
-        }*/
-        
-       // for (var i = 0; i < sn.length; i++) {
-        var t = sn[sn.length-1][0];
-        var p = 0;
-            for (var j = t; j <= number; j += t) {
-                var j1 = j;
-                while (j1 % t == 0) {
-                    p++;
-                    j1 /= t;
-                }
-                
-            }
-        //}
+            
+            let count = 0;
+            let result = 0;
+            let denom = i;
+            do {
+                count = Math.floor(number / denom);
+                denom *= i;
+                result += count;
+            } while (count != 0);
 
-        /*
-        //высичляем кол-во нулей
-        var r = [];
-        for (var i =0; i < sn.length; i++) {
-            r[i] = (snr[i] - snr[i] % sn[i][1]) / sn[i][1];
+            let test = Math.floor(result/ stepen);
+            if (test < answer) {
+              answer = test;
+            }
         }
-        
-          var min = r[0];
-          for (var i = 0; i < r.length; i++) {
-              if (r[i] < min) {
-                min = r[i];
-              }
-          }
-          */
-        
     }
-    return(p);
+    
+    return answer; 
 }
